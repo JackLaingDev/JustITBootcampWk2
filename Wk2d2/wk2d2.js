@@ -1,7 +1,7 @@
 const prompt = require("readline-sync")
 
 // THIS FILE IS PURELY FOR WORKING THROUGH BOOTCAMP ACTIVITIES
-// Questions
+// DAY 2
 const getName = () =>{
     console.log("Hello, what is your name?\n")
     let name = prompt.question();
@@ -138,6 +138,8 @@ const randomNumber = () =>{
     console.log(`I have generated a number between 1 and 10: ${randomNumber}`);
 }
 
+
+// DAY 2
 const starterActivity = () =>{
     // 1.
     let name = getName();
@@ -326,6 +328,256 @@ const fizzBuzzSwitch = () =>{
 
 }
 
+const sumOfArrays = () =>{
+    const arr1 =[23,421,2,34,12];
+    const arr2 =[3,41,242,314,612];
+    const arrays = [arr1, arr2];
+    
+    let sum = 0;                                           // SUM SHOULD BE 1704
+
+    for(const arr of arrays){
+        for(const num of arr){
+            sum += num;
+        }
+    }
+    console.log(sum);
+}
+
+const evenNumbers = () =>{
+    let n = prompt.question("Enter a number and I will output every even number between 1 and that number!\n");
+    let numbers = [];
+    let start = 2;
+
+    if(n == start){
+        console.log(`There are no numbers between 1 and 2 nevermind even ones!`);
+    } else{
+        for(start ; start < n; start++){
+            if((start % 2) == 0){
+                numbers.push(start);
+            }
+        }
+        console.log(`There are ${numbers.length} even numbers between 1 and ${n}, these are:\n ${numbers}`);
+    }
+
+}
+
+const reverseOrder = () =>{
+    const arr =[23,421,2,34,12];
+    let end = arr.length;
+
+    for(let i = end ; i >= 0; i--){
+        console.log(arr[i]);
+    }
+}
+
+const sumOfElements = () =>{
+    const arr1 =[23,421,2,34,12];
+    const arr2 =[3,41,242,314,612];
+    const arr_result = [];
+
+    for(let i = 0; i < arr1.length; i++){
+        arr_result.push(arr1[i] + arr2[i]);
+    }
+
+    console.log(arr_result);
+}
+
+// Given any string, change every second letter to "Z" (capital Z). Print the new version.
+const letterChange = (orginal_string) =>{
+    let result_string = "";
+
+    for(let i = 0; i < orginal_string.length; i++){
+        if((i == 0) || ((i % 2) == 0)){
+            result_string += "z";
+        }else{
+            result_string += orginal_string[i];
+        }
+    }
+    console.log(`I have added a z to every 2nd letter of ${orginal_string} to give: ${result_string}`);
+    
+}
+
+const containsY = (orginal_string) =>{
+    orginal_string = orginal_string.toUpperCase();
+
+    if(orginal_string.includes("Y")){
+        console.log("yes");
+    } else if(!orginal_string.includes("Y")){
+        console.log("no");
+    }
+}
+
+const factorial = () =>{
+    let n = prompt.question("Enter a number and I will tell you the factorial sum! \n");
+    let sum = 1;
+
+    for(let i=1; i <= n; i++){
+        sum *= i;
+    }
+    console.log(`The factorial sum of ${n} is: \n ${sum}`);
+}
+
+const guessThePin = () =>{
+    const pin = 1504;
+    let attempts = 0;
+
+    console.log("Try to guess my 4 digit pin!")
+    for(attempts; attempts < 4; attempts++){
+        let pinAttempt = prompt.question("Enter Pin: \n");
+        if(pinAttempt == pin){
+            console.log("You guess the pin correctly!");
+            break;
+        } 
+    }
+    if(attempts == 4){
+        console.log("You failed to guess the code! WOMP WOMP");
+    }
+}
+
+const palindromeChecker = () =>{
+    let string = prompt.question("Enter a string and I'll tell you if its a palindrome!:\n");
+
+    start = 0;
+    end = string.length -1;
+
+    for(start; start <end; start++){
+        if(string[start] != string[end]){
+            console.log("Mismatch detected! Your string is not a palindrome!");
+            return
+        }
+        end -=1;
+    }
+
+    console.log("Your string is a palindrome!");
+}
+
+const summation = () =>{
+    let n = prompt.question("Enter a number and I will tell you the sum of every number from 1 to it added together! \n");
+    let sum = 0;
+
+    for(let i=1; i <= n; i++){
+        sum += i;
+    }
+    console.log(`The summmation of ${n} is: \n ${sum}`);
+}
+
+const helloWorldX5 = () =>{
+    let n = 0;
+    while(n <5){
+        console.log("Hello World!")
+        n +=1;
+    }
+}
+
+const countTo5 = () =>{
+    let n = 0;
+    while(n <5){
+        console.log(n+1);
+        n +=1;
+    }
+}
+
+const letterAX10 = () =>{
+    let n = 0;
+    while(n <10){
+        console.log("A")
+        n +=1;
+    }
+}
+
+const fiveXString = () =>{
+    let n = 0;
+    strResult = "";
+    while(n <5){
+        strResult +="X";
+        n +=1;
+    }
+    console.log(strResult);
+}
+
+const newLineNumbers = () =>{
+    let n = 0;
+    while(n <3){
+        console.log(n+1);
+        n +=1;
+    }
+}
+
+const countDownFrom3 = () =>{
+    let n = 3;
+    while(n > 0){
+        console.log(n);
+        n -=1;
+    }
+}
+
+const simpleArrIteration = () =>{
+    let arr = ["Red", "Green", "Blue"];
+    let n = arr.length;
+    let i =0;
+
+    while(i < n){
+        console.log(arr[i]);
+        i += 1;
+    }
+}
+
+const countDownFrom5NoBlock = () =>{
+    let n = 5;
+    while(n > 0 && console.log(n), n--);
+}
+
+const infiniteLoop = () =>{
+    while(true){
+        console.log("Looping!");
+    }
+}
+
+const booleanLoop = () =>{
+    let bool = true;
+    let i = 1;
+    while(bool){
+        if(i == 7){bool = false;}
+        console.log("Looping!");
+        i++;
+    }
+}
+
+const reverseOrderForOf = () =>{
+    const arr =[23,421,2,34,12];
+    let end = arr.length;
+
+    for(const item of arr.reverse()){
+        console.log(item);
+    }
+}
+
+const doWhile = (bool) =>{
+    do{
+        console.log("You will see this message once if false was passed, and repeattedly if true was passed!\n");
+    } while(bool);
+}
+
+const guessThePinDoWhile = () =>{
+    const pin = 1504;
+    let attempts = 0;
+    let correct = false;
+
+    console.log("Try to guess my 4 digit pin!")
+    do{
+        let pinAttempt = prompt.question("Enter Pin: \n");
+        if(pinAttempt == pin){
+            console.log("You guess the pin correctly!");
+            correct = true;
+        } 
+        attempts++;
+    } while(attempts < 4 && !correct);
+
+    if(attempts == 4){
+        console.log("You failed to guess the code! WOMP WOMP");
+    }
+}
+
 // Run the solutions
 
 // Day 1
@@ -353,3 +605,30 @@ const fizzBuzzSwitch = () =>{
 // weekendOrWeekday();
 // gradeGenerator();
 // fizzBuzzSwitch();
+
+// Day 2 Loop Challenege Set
+// sumOfArrays();
+// evenNumbers();
+// reverseOrder();
+// sumOfElements();
+// letterChange("Hello World!");
+// containsY("Hello World!");
+// containsY("Hello World! You're wonderful!");
+// factorial();
+// guessThePin();
+// palindromeChecker();
+// summation();
+// helloWorldX5();
+// countTo5();
+// letterAX10();
+// fiveXString();
+// newLineNumbers();
+// countDownFrom3();
+// simpleArrIteration();
+// countDownFrom5NoBlock();
+// infiniteLoop();
+// booleanLoop()
+// reverseOrderForOf();
+// doWhile(false);
+// doWhile(true);
+// guessThePinDoWhile();
