@@ -115,6 +115,7 @@ body{
     justify-content: right;
     font-size: larger;
     font-weight: bolder;
+    cursor: default;
 }
 
 #equation h2{

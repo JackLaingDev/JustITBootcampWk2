@@ -28,6 +28,7 @@ let symbolPressed = false;
 let numberPressed = false;
 let equalsPressed = false;
 let result = 0;
+let prevEquations = [];
 
 // Utility
 let symbols = ["+", "-", "*", "/"];
@@ -86,6 +87,9 @@ const equalsClick = () =>{
         // Set current_text displaying to the result
         current_text = String(result);
         equation.innerHTML = current_text;
+
+        // Add equation to prevEquations to allow for a history
+        prevEquations.push(`${num1}${chosen_symbol}${num2}=${result}`);
 
         // Need to clear previous numbers and add answer as first number
         numbers.length = 0;
