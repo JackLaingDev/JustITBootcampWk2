@@ -13,6 +13,10 @@ body{
     align-items: center;
 }
 
+.flex-row{
+    flex-direction: row;
+}
+
 .gridLayout{
     display: grid;
     grid-template-columns: 75px 75px 75px 75px;
