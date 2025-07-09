@@ -16,6 +16,7 @@ let divide =     document.getElementById("divide");
 let decimal =    document.getElementById("decimal");
 let equation =   document.getElementById("equation_text");
 let calculator = document.getElementById("calculator");
+let equals =     document.getElementById("equals");
 
 // This is needed to allow for each click to concatenate the pressed digit onto the end
 // of the equation that is currently showing, stops it being wiped each time.
@@ -35,20 +36,20 @@ let symbols = ["+", "-", "*", "/"];
 let integers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 // Each onClick method for each button, adding a digit to the current_equation
-const oneClick = () =>      {current_text = current_text + "1"; current = "1"; one.classList.add("calcButtonPressed"); setTimeout(() => {one.classList.remove("calcButtonPressed")}, 100);}
-const twoClick = () =>      {current_text = current_text + "2"; current = "2"; two.classList.add("calcButtonPressed"); setTimeout(() => {two.classList.remove("calcButtonPressed")}, 100);}
-const threeClick = () =>    {current_text = current_text + "3"; current = "3"; three.classList.add("calcButtonPressed"); setTimeout(() => {three.classList.remove("calcButtonPressed")}, 100);}
-const fourClick = () =>     {current_text = current_text + "4"; current = "4"; four.classList.add("calcButtonPressed"); setTimeout(() => {four.classList.remove("calcButtonPressed")}, 100);}
-const fiveClick = () =>     {current_text = current_text + "5"; current = "5"; five.classList.add("calcButtonPressed"); setTimeout(() => {five.classList.remove("calcButtonPressed")}, 100);}
-const sixClick = () =>      {current_text = current_text + "6"; current = "6"; six.classList.add("calcButtonPressed"); setTimeout(() => {six.classList.remove("calcButtonPressed")}, 100);}
-const sevenClick = () =>    {current_text = current_text + "7"; current = "7"; seven.classList.add("calcButtonPressed"); setTimeout(() => {seven.classList.remove("calcButtonPressed")}, 100);}
-const eightClick = () =>    {current_text = current_text + "8"; current = "8"; eight.classList.add("calcButtonPressed"); setTimeout(() => {eight.classList.remove("calcButtonPressed")}, 100);}
-const nineClick = () =>     {current_text = current_text + "9"; current = "9"; nine.classList.add("calcButtonPressed"); setTimeout(() => {nine.classList.remove("calcButtonPressed")}, 100);}
-const zeroClick = () =>     {current_text = current_text + "0"; current = "0"; zero.classList.add("calcButtonPressed"); setTimeout(() => {zero.classList.remove("calcButtonPressed")}, 100);}
-const plusClick = () =>     {current_text = current_text + "+"; current = "+"; plus.classList.add("calcButtonPressed"); setTimeout(() => {plus.classList.remove("calcButtonPressed")}, 510);}
-const minusClick = () =>    {current_text = current_text + "-"; current = "-"; minus.classList.add("calcButtonPressed"); setTimeout(() => {minus.classList.remove("calcButtonPressed")}, 100);}
-const multiplyClick = () => {current_text = current_text + "*"; current = "*"; multiply.classList.add("calcButtonPressed"); setTimeout(() => {multiply.classList.remove("calcButtonPressed")}, 100);}
-const divideClick = () =>   {current_text = current_text + "/"; current = "/"; divide.classList.add("calcButtonPressed"); setTimeout(() => {divide.classList.remove("calcButtonPressed")}, 100);}
+const oneClick = () =>      {current_text = current_text + "1"; current = "1"; pressButtonAnim(one)};
+const twoClick = () =>      {current_text = current_text + "2"; current = "2"; pressButtonAnim(two);}
+const threeClick = () =>    {current_text = current_text + "3"; current = "3"; pressButtonAnim(three);}
+const fourClick = () =>     {current_text = current_text + "4"; current = "4"; pressButtonAnim(four);}
+const fiveClick = () =>     {current_text = current_text + "5"; current = "5"; pressButtonAnim(five);}
+const sixClick = () =>      {current_text = current_text + "6"; current = "6"; pressButtonAnim(six);}
+const sevenClick = () =>    {current_text = current_text + "7"; current = "7"; pressButtonAnim(seven);}
+const eightClick = () =>    {current_text = current_text + "8"; current = "8"; pressButtonAnim(eight);}
+const nineClick = () =>     {current_text = current_text + "9"; current = "9"; pressButtonAnim(nine);}
+const zeroClick = () =>     {current_text = current_text + "0"; current = "0"; pressButtonAnim(zero);}
+const plusClick = () =>     {current_text = current_text + "+"; current = "+"; pressButtonAnim(plus);}
+const minusClick = () =>    {current_text = current_text + "-"; current = "-"; pressButtonAnim(minus);}
+const multiplyClick = () => {current_text = current_text + "*"; current = "*"; pressButtonAnim(multiply);}
+const divideClick = () =>   {current_text = current_text + "/"; current = "/"; pressButtonAnim(divide);}
 // const decimalClick = () =>  {current_equation = current_equation + "."; current = ".";}  // CURRENTLY DISABLED, GOING TO BE ADDED SOON
 
 // Equals will act differently, as a sort of submit button
@@ -56,6 +57,7 @@ const equalsClick = () =>{
 
     // Add second number
     numbers.push(holder_number)
+    pressButtonAnim(equals);
 
 
     // process the equation
@@ -106,6 +108,14 @@ const equalsClick = () =>{
 
 }
 
+const pressButtonAnim = (elem) =>{
+    elem.classList.add("calcButtonPressed"); 
+
+    setTimeout(() => {
+        elem.classList.remove("calcButtonPressed")
+    }, 100);
+}
+
 // Reset function to use after a completed calculation
 const reset = () =>{
     current_text = "";                                                                    
@@ -137,7 +147,7 @@ const handleInteger = (int) =>{
         holder_number = holder_number + int;
         numberPressed = true;
         equation.innerHTML = current_text;
-    } 
+    } // if equals is pressed od not add anything to holder number etc
 }
 
 // Handle symbol in equation
