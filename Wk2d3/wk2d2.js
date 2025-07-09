@@ -417,25 +417,25 @@ const factorial = () =>{
     console.log(`The factorial sum of ${n} is: \n ${sum}`);
 }
 
-const guessThePin = () =>{
+const guessThePin = (pinAttempt, withdrawAmount) =>{
     const pin = 1504;
-    let attempts = 0;
+    let balance = 1000;
+    console.log(" \nNew Attempt:")
+    if(pinAttempt == pin && withdrawAmount <= balance){
+        console.log(`You guessed the pin correctly! and you withdrew  ${withdrawAmount} from ${balance}!`);
+        balance -= withdrawAmount;
+        console.log(`Your new balance is: ${balance}`);
+    } 
+    if (!(pinAttempt == pin)){
+        console.log("Incorrect pin!");
+    } 
+    if (!(withdrawAmount <= balance)){
+        console.log("You do not have enough funds!");
+    }
 
-    console.log("Try to guess my 4 digit pin!")
-    for(attempts; attempts < 4; attempts++){
-        let pinAttempt = prompt.question("Enter Pin: \n");
-        if(pinAttempt == pin){
-            console.log("You guess the pin correctly!");
-            break;
-        } 
-    }
-    if(attempts == 4){
-        console.log("You failed to guess the code! WOMP WOMP");
-    }
 }
 
-const palindromeChecker = () =>{
-    let string = prompt.question("Enter a string and I'll tell you if its a palindrome!:\n");
+const palindromeChecker = (string) =>{
 
     start = 0;
     end = string.length -1;
@@ -446,6 +446,20 @@ const palindromeChecker = () =>{
             return
         }
         end -=1;
+    }
+
+    console.log("Your string is a palindrome!");
+}
+
+const palindromeCheckerReverse = (string) =>{
+
+    start = 0;
+    end = string.length -1;
+    let string_reversed = string.split("").reverse().join("");         // splits up each character, reverses them as an array, joins back each character
+
+    if(string != string_reversed){
+        console.log("Your string is not a palindrome!");
+        return;
     }
 
     console.log("Your string is a palindrome!");
@@ -578,6 +592,10 @@ const guessThePinDoWhile = () =>{
     }
 }
 
+const sayHelloParam = (firstName, lastName) =>{
+    console.log(`Hello ${firstName} ${lastName}`);
+}
+
 // Run the solutions
 
 // Day 1
@@ -615,7 +633,7 @@ const guessThePinDoWhile = () =>{
 // containsY("Hello World!");
 // containsY("Hello World! You're wonderful!");
 // factorial();
-// guessThePin();
+// guessThePin();                                                // No longer valid from day 3, updated to require params
 // palindromeChecker();
 // summation();
 // helloWorldX5();
@@ -634,4 +652,15 @@ const guessThePinDoWhile = () =>{
 // guessThePinDoWhile();
 
 // Day 3
-
+// sayHelloParam("jack", "laing");
+// sayHelloParam("yusuf", "ahmed");
+// sayHelloParam("luke", "lewis");
+// sayHelloParam("marcel", "klucz");
+// guessThePin(1504, 1001);
+// guessThePin(1504, 500);
+// guessThePin(1501, 100);
+// guessThePin(1501, 1001);
+// palindromeChecker("hannah");
+// palindromeChecker("egg");
+// palindromeCheckerReverse("hannah");
+// palindromeCheckerReverse("egg");
