@@ -31,17 +31,14 @@ body{
 
 .gridItem{
     margin: 10px;
-    background-color: black;
     width: 80%;
     height: 80%;
     color: white;
     font-weight: bolder;
-    border-radius: 10px;
+    border-radius: 6px;
 }
 
 .gridItem:hover{
-    background-color: beige;
-    color: brown;
     cursor: pointer;
 }
 
@@ -126,6 +123,14 @@ body{
     padding-right: 5%;
 }
 
+#history{
+    background-color: rgb(203, 228, 228);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: -6px 6px 0px 3px black;
+    margin-left: 10%;
+    height: 85%;
+}
 
 .calculator{
     background-color: rgb(108, 120, 120);
@@ -141,6 +146,19 @@ body{
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     box-shadow: -6px 6px 0px 1px black;
+}
+
+.calcButton{
+    box-shadow: -4px 4px 0px 2px rgb(149, 103, 12);
+    background-color: rgb(232, 161, 20);
+}
+
+.calcButtonPressed{
+    position: relative;
+    top:2px;
+    right:2px;
+    box-shadow: -2px 2px 0px 2px rgb(149, 103, 12);
+    background-color: rgb(232, 161, 20);
 }
 
 

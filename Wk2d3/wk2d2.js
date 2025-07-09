@@ -1,9 +1,9 @@
-const prompt = require("readline-sync")
+const prompt = require("readline-sync");
 
 // THIS FILE IS PURELY FOR WORKING THROUGH BOOTCAMP ACTIVITIES
 // DAY 2
 const getName = () =>{
-    console.log("Hello, what is your name?\n")
+    console.log("Hello, what is your name?\n");
     let name = prompt.question();
     return name;
 }
@@ -632,3 +632,5 @@ const guessThePinDoWhile = () =>{
 // doWhile(false);
 // doWhile(true);
 // guessThePinDoWhile();
+
+// Day 3

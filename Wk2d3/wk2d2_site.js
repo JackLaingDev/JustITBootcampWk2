@@ -35,20 +35,20 @@ let symbols = ["+", "-", "*", "/"];
 let integers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 // Each onClick method for each button, adding a digit to the current_equation
-const oneClick = () =>      {current_text = current_text + "1"; current = "1";}
-const twoClick = () =>      {current_text = current_text + "2"; current = "2";}
-const threeClick = () =>    {current_text = current_text + "3"; current = "3";}
-const fourClick = () =>     {current_text = current_text + "4"; current = "4";}
-const fiveClick = () =>     {current_text = current_text + "5"; current = "5";}
-const sixClick = () =>      {current_text = current_text + "6"; current = "6";}
-const sevenClick = () =>    {current_text = current_text + "7"; current = "7";}
-const eightClick = () =>    {current_text = current_text + "8"; current = "8";}
-const nineClick = () =>     {current_text = current_text + "9"; current = "9";}
-const zeroClick = () =>     {current_text = current_text + "0"; current = "0";}
-const plusClick = () =>     {current_text = current_text + "+"; current = "+";}
-const minusClick = () =>    {current_text = current_text + "-"; current = "-";}
-const multiplyClick = () => {current_text = current_text + "*"; current = "*";}
-const divideClick = () =>   {current_text = current_text + "/"; current = "/";}
+const oneClick = () =>      {current_text = current_text + "1"; current = "1"; one.classList.add("calcButtonPressed"); setTimeout(() => {one.classList.remove("calcButtonPressed")}, 100);}
+const twoClick = () =>      {current_text = current_text + "2"; current = "2"; two.classList.add("calcButtonPressed"); setTimeout(() => {two.classList.remove("calcButtonPressed")}, 100);}
+const threeClick = () =>    {current_text = current_text + "3"; current = "3"; three.classList.add("calcButtonPressed"); setTimeout(() => {three.classList.remove("calcButtonPressed")}, 100);}
+const fourClick = () =>     {current_text = current_text + "4"; current = "4"; four.classList.add("calcButtonPressed"); setTimeout(() => {four.classList.remove("calcButtonPressed")}, 100);}
+const fiveClick = () =>     {current_text = current_text + "5"; current = "5"; five.classList.add("calcButtonPressed"); setTimeout(() => {five.classList.remove("calcButtonPressed")}, 100);}
+const sixClick = () =>      {current_text = current_text + "6"; current = "6"; six.classList.add("calcButtonPressed"); setTimeout(() => {six.classList.remove("calcButtonPressed")}, 100);}
+const sevenClick = () =>    {current_text = current_text + "7"; current = "7"; seven.classList.add("calcButtonPressed"); setTimeout(() => {seven.classList.remove("calcButtonPressed")}, 100);}
+const eightClick = () =>    {current_text = current_text + "8"; current = "8"; eight.classList.add("calcButtonPressed"); setTimeout(() => {eight.classList.remove("calcButtonPressed")}, 100);}
+const nineClick = () =>     {current_text = current_text + "9"; current = "9"; nine.classList.add("calcButtonPressed"); setTimeout(() => {nine.classList.remove("calcButtonPressed")}, 100);}
+const zeroClick = () =>     {current_text = current_text + "0"; current = "0"; zero.classList.add("calcButtonPressed"); setTimeout(() => {zero.classList.remove("calcButtonPressed")}, 100);}
+const plusClick = () =>     {current_text = current_text + "+"; current = "+"; plus.classList.add("calcButtonPressed"); setTimeout(() => {plus.classList.remove("calcButtonPressed")}, 510);}
+const minusClick = () =>    {current_text = current_text + "-"; current = "-"; minus.classList.add("calcButtonPressed"); setTimeout(() => {minus.classList.remove("calcButtonPressed")}, 100);}
+const multiplyClick = () => {current_text = current_text + "*"; current = "*"; multiply.classList.add("calcButtonPressed"); setTimeout(() => {multiply.classList.remove("calcButtonPressed")}, 100);}
+const divideClick = () =>   {current_text = current_text + "/"; current = "/"; divide.classList.add("calcButtonPressed"); setTimeout(() => {divide.classList.remove("calcButtonPressed")}, 100);}
 // const decimalClick = () =>  {current_equation = current_equation + "."; current = ".";}  // CURRENTLY DISABLED, GOING TO BE ADDED SOON
 
 // Equals will act differently, as a sort of submit button
@@ -225,3 +225,4 @@ if(calculator){
 } else{
     alert("Calculator failed to load.")
 }
+
