@@ -123,15 +123,6 @@ body{
     padding-right: 5%;
 }
 
-#history{
-    background-color: rgb(203, 228, 228);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: -6px 6px 0px 3px black;
-    margin-left: 10%;
-    height: 85%;
-}
-
 .calculator{
     background-color: rgb(108, 120, 120);
     padding: 30px;
@@ -162,6 +153,26 @@ body{
 }
 
 
+#history{
+    background-color: rgb(203, 228, 228);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: -6px 6px 0px 3px black;
+    margin-left: 20%;
+    height: 85%;
+    justify-content: flex-start;
+}
+
+#history p{
+    font-weight: bolder;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 3px;
+    color: rgb(96, 91, 85);
+}
+
+#equationHistory{
+    justify-content: flex-start;
+}
 
 
 

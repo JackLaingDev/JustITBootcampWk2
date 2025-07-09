@@ -17,6 +17,7 @@ let decimal =    document.getElementById("decimal");
 let equation =   document.getElementById("equation_text");
 let calculator = document.getElementById("calculator");
 let equals =     document.getElementById("equals");
+let history =    document.getElementById("equationHistory");
 
 // This is needed to allow for each click to concatenate the pressed digit onto the end
 // of the equation that is currently showing, stops it being wiped each time.
@@ -90,8 +91,14 @@ const equalsClick = () =>{
         current_text = String(result);
         equation.innerHTML = current_text;
 
-        // Add equation to prevEquations to allow for a history
-        prevEquations.push(`${num1}${chosen_symbol}${num2}=${result}`);
+        // Get equation in readable form
+        let equationFinal = `${num1}${chosen_symbol}${num2}=${result}`;
+
+        // Add equation to prevEquations to keep a programmable history
+        prevEquations.push(equationFinal);
+
+        // Update history
+        updateHistory(equationFinal);
 
         // Need to clear previous numbers and add answer as first number
         numbers.length = 0;
@@ -184,11 +191,18 @@ const handleSymbol= (symbol) =>{
 
     } else if(!numberPressed){
         alert("You cannot press a symbol before a number!");
-        current_text = current_text.slice(0, -1);                                                // NEED TO ERASE INCORRECTLY ADDED DIGIT TO EQUATION BY ONCLCIK METHODS
+        current_text = "";                                                                           // NEED TO ERASE INCORRECTLY ADDED DIGIT TO EQUATION BY ONCLCIK METHODS
     } else if(symbolPressed && !equalsPressed){
         alert("We currently do not support equations with more than one symbol!")
-        current_text = current_text.slice(0, -1);                                                // NEED TO ERASE INCORRECTLY ADDED DIGIT TO EQUATION BY ONCLCIK METHODS
+        current_text = "";                                                                           // NEED TO ERASE INCORRECTLY ADDED DIGIT TO EQUATION BY ONCLCIK METHODS
     }      
+}
+
+const updateHistory = (equation) =>{
+    const newItem = document.createElement('p');
+
+    newItem.innerHTML = equation;
+    history.appendChild(newItem);
 }
 
 // Main
