@@ -1,0 +1,149 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    height: 100vh;
+    width: 100vw;
+    background-color: azure;
+}
+
+.align-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-row{
+    flex-direction: row;
+}
+
+.gridLayout{
+    display: grid;
+    grid-template-columns: 75px 75px 75px 75px;
+    grid-template-rows: 75px 75px 75px 75px 75px;
+    grid-template-areas: 
+        "equation equation equation equation"
+        "one two three plus"     /* "plus" is now quoted */
+        "four five six minus"    /* "minus" is now quoted */
+        "seven eight nine gmultiply" /* "multiply" is now quoted */
+        "gdecimal gzero divide equals";
+}
+
+.gridItem{
+    margin: 10px;
+    background-color: black;
+    width: 80%;
+    height: 80%;
+    color: white;
+    font-weight: bolder;
+    border-radius: 10px;
+}
+
+.gridItem:hover{
+    background-color: beige;
+    color: brown;
+    cursor: pointer;
+}
+
+#one{
+    grid-area: one;
+}
+
+#two{
+    grid-area: two;    
+}
+
+#three{
+    grid-area: three;    
+}
+
+#four{
+    grid-area: four;    
+}
+
+#five{
+    grid-area: five;    
+}
+
+#six{
+    grid-area: six;    
+}
+
+#seven{
+    grid-area: seven;    
+}
+
+#eight{
+    grid-area: eight;    
+}
+
+#nine{
+    grid-area: nine;
+}
+
+#zero{
+    grid-area: gzero;    
+}
+
+#plus{
+    grid-area: plus;    
+}
+
+#minus{
+    grid-area: minus;    
+}
+
+#multiply{
+    grid-area: gmultiply;    
+}
+
+#divide{
+    grid-area: divide;    
+}
+
+#decimal{
+    grid-area: gdecimal;    
+}
+
+#equals{
+    grid-area: equals;    
+}
+
+#equation{
+    grid-area: equation;
+    width: 95%;
+    background-color: blanchedalmond;
+    color:brown;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    font-size: larger;
+    font-weight: bolder;
+    cursor: default;
+}
+
+#equation h2{
+    padding-right: 5%;
+}
+
+
+.calculator{
+    background-color: rgb(108, 120, 120);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: -6px 6px 0px 5px black;
+}
+
+.description{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 5%;
+    margin: 30px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: -6px 6px 0px 1px black;
+}
+
+
+
+
+
