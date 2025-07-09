@@ -20,13 +20,14 @@ body{
 .gridLayout{
     display: grid;
     grid-template-columns: 75px 75px 75px 75px;
-    grid-template-rows: 75px 75px 75px 75px 75px;
+    grid-template-rows: 75px 75px 75px 75px 75px 75px;
     grid-template-areas: 
         "equation equation equation equation"
         "one two three plus"     /* "plus" is now quoted */
         "four five six minus"    /* "minus" is now quoted */
         "seven eight nine gmultiply" /* "multiply" is now quoted */
-        "gdecimal gzero divide equals";
+        "gdecimal gzero divide equals"
+        "Na Na openBracket closedBracket";
 }
 
 .gridItem{
@@ -104,6 +105,18 @@ body{
 
 #equals{
     grid-area: equals;    
+}
+
+#openBracket{
+    grid-area: openBracket;
+}
+
+#closedBracket{
+    grid-area: closedBracket;
+}
+
+#Na{
+    grid-area: Na;
 }
 
 #equation{
