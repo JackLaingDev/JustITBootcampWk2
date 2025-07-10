@@ -345,16 +345,15 @@ class Utility{
 }
 
 // Initialisation and Setup
+const utility = new Utility();
 
-function setup(){
-    const custService = new CustomerService();
-    const accService = new AccountService();
-    const transService = new TransactionService();
-    const display = new Display();
-    const utility = new Utility();
+const custService = new CustomerService();
+const accService = new AccountService();
+const transService = new TransactionService();
+const display = new Display();
 
-    const bank = new Bank(custService, accService, transService, display);
-    bank.run();
-}
+const bank = new Bank(custService, accService, transService, display);
+bank.run();
 
-setup();
+
+
