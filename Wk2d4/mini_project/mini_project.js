@@ -39,11 +39,47 @@ class Bank{
     }
 
     register(){
-        this.display.registerMessage();
+        display.registerMessage();
+        let fName = display.getFName();
+        let lName = display.getLName();
+
+        this.custServ.createCustomer(fName, lName);
+
+        // Testing
+        // console.log(`Customer should now appear in customers: {${customers[0].firstName},  ${customers[0].lastName}}`);
     }
 
     run(){
+        this.register();
+    }
+}
 
+
+// Services
+class CustomerService{
+
+    constructor(){
+        this.customer = new Customer();
+    }
+
+    createCustomer(firstName, lastName){                        
+        const cust = new Customer(firstName,lastName);
+        customers.push(cust);
+        this.customer = cust;                                         // Set so once created, custServ manages that Customer
+    }
+}
+
+class AccountService{
+    
+    constructor(){
+        this.account = new Account();
+    }
+}
+
+class TransactionService{
+    
+    constructor(){
+        this.transaction = new Transaction();
     }
 }
 
@@ -55,7 +91,7 @@ class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.accounts = [];
-        this.id = customers.length;
+        this.id = customers.length - 1;
     }
 
 }
@@ -63,9 +99,9 @@ class Customer {
 class Account {
 
     constructor(customer, balance, id){
-        this.customer = customer;
+        this.customer = new Customer();
         this.transactions = [];
-        this.id = id;
+        this.id = accounts.length - 1;
     }
 
 }
@@ -73,39 +109,13 @@ class Account {
 class Transaction{
 
     constructor(senderAcc, recipientAcc, transAmount){
-        this.senderAcc = senderAcc;
-        this.recipientAcc = recipientAcc;
+        this.senderAcc = new Account();
+        this.recipientAcc = new Account();
         this.transAmount = transAmount;
+        this.id = transactions.length - 1;
     }
 }
 
-
-// Services
-class CustomerService{
-
-    constructor(){
-        this.customer = customer;
-    }
-
-    createCustomer(firstName, lastName){                         
-        const cust = new Customer(firstName,lastName);
-        customers.push(cust);
-    }
-}
-
-class AccountService{
-    
-    constructor(){
-        this.account = account;
-    }
-}
-
-class TransactionService{
-    
-    constructor(){
-        this.transaction = transaction;
-    }
-}
 
 // Display
 class Display{
