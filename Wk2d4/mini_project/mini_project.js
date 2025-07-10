@@ -34,7 +34,7 @@ class Bank{
         // Bank uses the systems to manipulate the flow and overall program
         this.custServ = custServ;
         this.accServ = accServ;
-        this.transAmount = transServ;
+        this.transServ = transServ;
         this.display = display;
     }
 
@@ -49,8 +49,35 @@ class Bank{
         // console.log(`Customer should now appear in customers: {${customers[0].firstName},  ${customers[0].lastName}}`);
     }
 
+    customerChoose(choice){
+        switch(choice){
+            case 1: this.accServ.createAccount(this.custServ.customer); display.accountSuccess(); break;
+            case 2: this.custServ.showAccounts(); break;
+        }
+    }
+
+    customerMenu(){
+        display.customerOptions();
+        let choice = utility.getNumber();
+        this.customerChoose(choice);
+
+        // Testing
+        // console.log(`Account should now appear in: ${accounts}`);
+    }
+
     run(){
-        this.register();
+        if(!custService.customer){
+
+            // TODO: add login option
+            this.register();
+        }
+
+
+        // Main loop
+        while(true){
+            this.customerMenu();
+        }
+
     }
 }
 
@@ -59,7 +86,7 @@ class Bank{
 class CustomerService{
 
     constructor(){
-        this.customer = new Customer();
+        this.customer = null;
     }
 
     createCustomer(firstName, lastName){                        
@@ -67,19 +94,36 @@ class CustomerService{
         customers.push(cust);
         this.customer = cust;                                         // Set so once created, custServ manages that Customer
     }
+
+    showAccounts(){
+        const custAccounts = this.customer.accounts;
+
+        console.log("Accounts:\n");
+        for(const acc of custAccounts){
+            display.displayAccount(acc);
+        }
+    }
+
 }
 
 class AccountService{
     
     constructor(){
-        this.account = new Account();
+        this.account = null;
+    }
+
+    createAccount(customer){
+        const id = accounts.length + 1;
+        const acc = new Account(customer,0, id);
+        customer.accounts.push(acc);
+        accounts.push(acc);
     }
 }
 
 class TransactionService{
     
     constructor(){
-        this.transaction = new Transaction();
+        this.transaction = null;
     }
 }
 
@@ -91,7 +135,7 @@ class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.accounts = [];
-        this.id = customers.length - 1;
+        this.id = customers.length;
     }
 
 }
@@ -101,7 +145,8 @@ class Account {
     constructor(customer, balance, id){
         this.customer = new Customer();
         this.transactions = [];
-        this.id = accounts.length - 1;
+        this.balance = 0;
+        this.id = accounts.length;
     }
 
 }
@@ -112,7 +157,7 @@ class Transaction{
         this.senderAcc = new Account();
         this.recipientAcc = new Account();
         this.transAmount = transAmount;
-        this.id = transactions.length - 1;
+        this.id = transactions.length;
     }
 }
 
@@ -122,6 +167,10 @@ class Display{
 
     constructor(){
 
+    }
+
+    chooseOption(){
+        console.log("\nChoose an option by entering its corresponding number:");
     }
 
     getFName(){
@@ -140,6 +189,31 @@ class Display{
         console.log("Enter your the first and last name you used to open an account!");
     }
 
+    customerOptions(){
+        this.chooseOption();
+        console.log("1. Create Account\n2. View accounts\n");
+    }
+
+    accountSuccess(){
+        console.log(`Account create successfully!`);
+    }
+
+    displayAccount(account){
+        console.log(`${account.id}. Balance: ${account.balance}`);
+    }
+
+}
+
+// Utility functions
+class Utility{
+
+    constructor(){
+
+    }
+
+    getNumber(){
+        return Number(prompt.question());
+    }
 }
 
 // Initialisation and Setup
@@ -147,6 +221,7 @@ const custService = new CustomerService();
 const accService = new AccountService();
 const transService = new TransactionService();
 const display = new Display();
+const utility = new Utility();
 
 const bank = new Bank(custService, accService, transService, display);
 bank.run();
