@@ -22,3 +22,12 @@ class Customer {
     }
 
 }
+
+class Account {
+
+    constructor(customer){
+        this.customer = customer;
+        this.transactions = [];
+    }
+
+}
