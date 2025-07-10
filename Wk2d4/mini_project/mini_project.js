@@ -29,8 +29,21 @@ let transactions = [];                                           // Needed as a 
 // Overall system
 class Bank{
 
-    constructor(){
-        
+    constructor(custServ, accServ, transServ, display){
+
+        // Bank uses the systems to manipulate the flow and overall program
+        this.custServ = custServ;
+        this.accServ = accServ;
+        this.transAmount = transServ;
+        this.display = display;
+    }
+
+    register(){
+        this.display.registerMessage();
+    }
+
+    run(){
+
     }
 }
 
@@ -43,11 +56,6 @@ class Customer {
         this.lastName = lastName;
         this.accounts = [];
         this.id = customers.length;
-    }
-
-    createCustomer(firstName, lastName){                         // USE INSTEAD OF INSTRUCTOR TO ENSURE CUST IS ADDED TO customers[]!
-        const cust = new Customer(firstName,lastName);
-        customers.push(cust);
     }
 
 }
@@ -75,21 +83,26 @@ class Transaction{
 // Services
 class CustomerService{
 
-    constructor(customer){
+    constructor(){
         this.customer = customer;
+    }
+
+    createCustomer(firstName, lastName){                         
+        const cust = new Customer(firstName,lastName);
+        customers.push(cust);
     }
 }
 
 class AccountService{
     
-    constructor(account){
+    constructor(){
         this.account = account;
     }
 }
 
 class TransactionService{
     
-    constructor(transaction){
+    constructor(){
         this.transaction = transaction;
     }
 }
@@ -98,6 +111,32 @@ class TransactionService{
 class Display{
 
     constructor(){
-        
+
     }
+
+    getFName(){
+        return prompt.question("What is your first name?\n");
+    }
+
+    getLName(){
+        return prompt.question("What is your last name?\n");
+    }
+
+    registerMessage(){
+        console.log("In Order to register we need your first and last name!");
+    }
+
+    loginMessage(){
+        console.log("Enter your the first and last name you used to open an account!");
+    }
+
 }
+
+// Initialisation and Setup
+const custService = new CustomerService();
+const accService = new AccountService();
+const transService = new TransactionService();
+const display = new Display();
+
+const bank = new Bank(custService, accService, transService, display);
+bank.run();
