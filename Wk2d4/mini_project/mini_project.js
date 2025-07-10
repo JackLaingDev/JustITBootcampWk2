@@ -13,4 +13,12 @@ Classes:
 */
 
 
-class customer
+class Customer {
+
+    constructor(firstName, lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.accounts = [];
+    }
+
+}
