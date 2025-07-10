@@ -53,7 +53,24 @@ class Bank{
         switch(choice){
             case 1: this.accServ.createAccount(this.custServ.customer); display.accountSuccess(); break;
             case 2: this.custServ.showAccounts(); break;
+            case 3: this.transferMenu(); break;
         }
+    }
+
+    transferMenu(){
+        display.transferMessage();
+        display.senderAccMessage();
+        let senderId = utility.getNumber();
+        display.recipientAccMessage();
+        let recipientId = utility.getNumber();
+        display.transAmountMessage();
+        let amount = utility.getNumber();
+
+        let senderAcc = utility.getAccById(senderId);
+        let recipientAcc = utility.getAccById(recipientId);
+
+        transService.makeTransfer(senderAcc, recipientAcc, amount);
+        
     }
 
     customerMenu(){
@@ -125,6 +142,31 @@ class TransactionService{
     constructor(){
         this.transaction = null;
     }
+
+    createTransaction(senderAcc, recipientAcc, amount){
+        const trans = new Transaction(senderAcc, recipientAcc, amount);
+
+        // Add to each accounts local transactions list
+        senderAcc.transactions.push(trans);
+        recipientAcc.transactions.push(trans);
+
+        // Add to global transactions list
+        transactions.push(trans);
+
+    }
+
+    makeTransfer(senderAcc, recipientAcc, amount){
+
+        if(senderAcc.balance >= amount){
+            // enough funds for trans to go through
+            senderAcc.balance -= amount;
+            recipientAcc.balance += amount;
+            this.createTransaction(senderAcc, recipientAcc, amount);
+        }
+        else if(senderAcc.balance <= amount){
+
+        }
+    }
 }
 
 
@@ -145,7 +187,7 @@ class Account {
     constructor(customer, balance, id){
         this.customer = new Customer();
         this.transactions = [];
-        this.balance = 0;
+        this.balance = 1000;
         this.id = accounts.length;
     }
 
@@ -154,8 +196,8 @@ class Account {
 class Transaction{
 
     constructor(senderAcc, recipientAcc, transAmount){
-        this.senderAcc = new Account();
-        this.recipientAcc = new Account();
+        this.senderAcc = senderAcc;
+        this.recipientAcc = recipientAcc;
         this.transAmount = transAmount;
         this.id = transactions.length;
     }
@@ -191,7 +233,7 @@ class Display{
 
     customerOptions(){
         this.chooseOption();
-        console.log("1. Create Account\n2. View accounts\n");
+        console.log("1. Create Account\n2. View Accounts\n3. Transfer between Accounts");
     }
 
     accountSuccess(){
@@ -200,6 +242,26 @@ class Display{
 
     displayAccount(account){
         console.log(`${account.id}. Balance: ${account.balance}`);
+    }
+
+    transactionSuccess(){
+        console.log("Transaction completed successfully!");
+    }
+
+    senderAccMessage(){
+        console.log("Please enter the Id of the account you want to transfer money from!");
+    }
+
+    recipientAccMessage(){
+        console.log("Please enter the Id of the account you want to transfer money to!");
+    }
+
+    transferMessage(){
+        console.log("You have chosen to make a transaction!");
+    }
+
+    transAmountMessage(){
+        console.log("Enter the amount you want to transfer:");
     }
 
 }
@@ -213,6 +275,10 @@ class Utility{
 
     getNumber(){
         return Number(prompt.question());
+    }
+
+    getAccById(id){
+        return accounts[id];
     }
 }
 
