@@ -57,8 +57,55 @@ const oBracketClick = () => {current_text = current_text + "("; current = "("; p
 const cBracketClick = () => {current_text = current_text + ")"; current = ")"; pressButtonAnim(closedBracket);}
 const decimalClick = () =>  {current_text = current_text + "."; current = "."; pressButtonAnim(decimal);}  // CURRENTLY DISABLED, GOING TO BE ADDED SOON
 
-//THERE ARE 2 EQUALS FUNCTIONS, THE FIRST IS A CUSTOM MADE EVAL() FUNC, THE SECOND USES EVAL TO GET THE CALC WORKING FULLY DURING DEVELOPMENT
-const equalsClickCustom = () =>{
+// UPDATED: equalsClick() is now one function but has a commented out customEval() to utilise instead of 2 equals functions
+const equalsClick = () =>{
+
+    // Play animations
+    pressButtonAnim(equals);
+
+
+    // process the equation
+    if(numbers.length < 1){
+        alert("You must enter 2 numbers and 1 symbol before pressing equals");
+    } else if(!equalsPressed){
+
+        let num1 = Number(numbers[0]);
+        let num2 = Number(numbers[1]);
+
+        // Dev testing ONLY
+        console.log(`equalsClick: num1: ${num1}\nnum2:${num2}\nchosen_symbol:${chosen_symbol}`);
+
+        // Use eval() to get result
+        let result = eval(current_text);
+        // let result = customEval();
+        let original_equation = current_text;
+
+        // Set current_text displaying to the result
+        current_text = String(result);
+        equation.innerHTML = current_text;
+
+        // Get equation in readable form
+        let equationFinal = `${original_equation}=${result}`;
+
+        // Add equation to prevEquations to keep a programmable history
+        prevEquations.push(equationFinal);
+
+        // Update history
+        updateHistory(equationFinal);
+
+        // Need to clear previous numbers and add answer as first number
+        numbers.length = 0;
+        holder_number = "";                     // NEED TO AVOID PREVIOUS SECOND NUMBER BEING STRING CONCATENATED TO NEXT NUMBER
+        numbers.push(Number(current_text));
+
+        equalsPressed = true;
+    } else if(equalsPressed){
+        reset();
+    }
+
+}
+
+const customEval = (equation) =>{
 
     // Add second number
     numbers.push(holder_number)
@@ -119,51 +166,7 @@ const equalsClickCustom = () =>{
 
 }
 
-const equalsClickEval = () =>{
 
-    // Play animations
-    pressButtonAnim(equals);
-
-
-    // process the equation
-    if(numbers.length < 1){
-        alert("You must enter 2 numbers and 1 symbol before pressing equals");
-    } else if(!equalsPressed){
-
-        let num1 = Number(numbers[0]);
-        let num2 = Number(numbers[1]);
-
-        // Dev testing ONLY
-        console.log(`equalsClick: num1: ${num1}\nnum2:${num2}\nchosen_symbol:${chosen_symbol}`);
-
-        // Use eval() to get result
-        let result = eval(current_text);
-        let original_equation = current_text;
-
-        // Set current_text displaying to the result
-        current_text = String(result);
-        equation.innerHTML = current_text;
-
-        // Get equation in readable form
-        let equationFinal = `${original_equation}=${result}`;
-
-        // Add equation to prevEquations to keep a programmable history
-        prevEquations.push(equationFinal);
-
-        // Update history
-        updateHistory(equationFinal);
-
-        // Need to clear previous numbers and add answer as first number
-        numbers.length = 0;
-        holder_number = "";                     // NEED TO AVOID PREVIOUS SECOND NUMBER BEING STRING CONCATENATED TO NEXT NUMBER
-        numbers.push(Number(current_text));
-
-        equalsPressed = true;
-    } else if(equalsPressed){
-        reset();
-    }
-
-}
 
 const pressButtonAnim = (elem) =>{
     elem.classList.add("calcButtonPressed"); 
@@ -290,7 +293,7 @@ if(calculator){
                 case "divide":         divideClick();     break;
                 case "multiply":       multiplyClick();   break;
                 case "decimal":        decimalClick();    break;
-                case "equals":         equalsClickEval(); break;                  // Use equalsClickCustom() to use my OWN eval() method
+                case "equals":         equalsClick(); break;                  // Use equalsClickCustom() to use my OWN eval() method
                 case "openBracket":    oBracketClick();   break;
                 case "closedBracket":  cBracketClick();   break;
                 case "decimal":        decimalClick();    break;
