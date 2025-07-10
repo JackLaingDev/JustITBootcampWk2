@@ -1,7 +1,8 @@
 const prompt = require("readline-sync");
 
 /*
-This Project is to demonstrate a basic CLI based banking system within JS.
+This Project is to demonstrate a basic CLI based banking system within JS that loosely follows the MVC architecture,
+made within 4 hours.
 
 Overall System:
     * Bank -       This acts as a controller for the overall flow of the program using the services
@@ -18,6 +19,16 @@ Models:
 
 Display:
     * This has multiple useful CLI based views (getName() etc)
+
+Improvements:
+    * Implement Login and Logout
+    * Implement data validation
+    * Ensure customer can only make transactions from THEIR accounts if(senderAcc is in CustomerAccounts)
+    * Add Exit feature to close program
+    * Add Back feature to go back a page
+    * To make the code more modular and in line with the MVC architecture I may need to detach some of the console.log()'s from service
+      classes as they should only contain business logic, may need to get funcs to return a bool to indicate its success or failure to allow
+      for the display class to be able to display separate success and failure messages
 
 */
 
@@ -334,11 +345,16 @@ class Utility{
 }
 
 // Initialisation and Setup
-const custService = new CustomerService();
-const accService = new AccountService();
-const transService = new TransactionService();
-const display = new Display();
-const utility = new Utility();
 
-const bank = new Bank(custService, accService, transService, display);
-bank.run();
+function setup(){
+    const custService = new CustomerService();
+    const accService = new AccountService();
+    const transService = new TransactionService();
+    const display = new Display();
+    const utility = new Utility();
+
+    const bank = new Bank(custService, accService, transService, display);
+    bank.run();
+}
+
+setup();
