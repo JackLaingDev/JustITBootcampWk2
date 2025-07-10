@@ -16,7 +16,8 @@ Models:
     * Account -     This stores banking info like balance, transactions etc.
     * Transaction - This stores transaction info like sender and recipient Ids and transaction amount
 
-
+Display:
+    * This has multiple useful CLI based views (getName() etc)
 
 */
 
@@ -90,5 +91,13 @@ class TransactionService{
     
     constructor(transaction){
         this.transaction = transaction;
+    }
+}
+
+// Display
+class Display{
+
+    constructor(){
+        
     }
 }
