@@ -35,7 +35,7 @@ let result = 0;
 let prevEquations = [];
 
 // Utility
-let symbols = ["+", "-", "*", "/", "(", ")"];
+let symbols = ["+", "-", "*", "/", "(", ")", "."];
 let integers = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
 
 // Each onClick method for each button, adding a digit to the current_equation
@@ -55,9 +55,9 @@ const multiplyClick = () => {current_text = current_text + "*"; current = "*"; p
 const divideClick = () =>   {current_text = current_text + "/"; current = "/"; pressButtonAnim(divide);}
 const oBracketClick = () => {current_text = current_text + "("; current = "("; pressButtonAnim(openBracket);}
 const cBracketClick = () => {current_text = current_text + ")"; current = ")"; pressButtonAnim(closedBracket);}
-// const decimalClick = () =>  {current_equation = current_equation + "."; current = ".";}  // CURRENTLY DISABLED, GOING TO BE ADDED SOON
+const decimalClick = () =>  {current_text = current_text + "."; current = "."; pressButtonAnim(decimal);}  // CURRENTLY DISABLED, GOING TO BE ADDED SOON
 
-//THERE ARE 2 EQUALS FUNCTIONS, THE FIRST IS A CUSTOM MADE EVAL() FUNC, THE SECOND USES EVAL TO GET THE CALC WORKIGN FULLY DURING DEVELOPMENT
+//THERE ARE 2 EQUALS FUNCTIONS, THE FIRST IS A CUSTOM MADE EVAL() FUNC, THE SECOND USES EVAL TO GET THE CALC WORKING FULLY DURING DEVELOPMENT
 const equalsClickCustom = () =>{
 
     // Add second number
@@ -219,6 +219,8 @@ const isSymbol = (x) =>{
 
 const handleSymbol= (symbol) =>{
     let isBracket = ["(", ")"].includes(symbol);
+    let isDecimal = ["."].includes(symbol);
+
     // Store holder_number  in numbers as int when a symbol is pressed as u know thats the end of the number
     // Cant process if symbol has already been pressed once as model currently only supports one symbol
     if(numberPressed || isBracket){
@@ -273,24 +275,25 @@ if(calculator){
             // Gets the Id of the clicked element
             const id = clickedElement.id;
             switch(id){
-                case "one":            oneClick(); break;
-                case "two":            twoClick(); break;
-                case "three":          threeClick(); break;
-                case "four":           fourClick(); break;
-                case "five":           fiveClick(); break;
-                case "six":            sixClick(); break;
-                case "seven":          sevenClick(); break;
-                case "eight":          eightClick(); break;
-                case "nine":           nineClick(); break;
-                case "zero":           zeroClick(); break;
-                case "plus":           plusClick(); break;
-                case "minus":          minusClick(); break;
-                case "divide":         divideClick(); break;
-                case "multiply":       multiplyClick(); break;
-                case "decimal":        decimalClick(); break;
+                case "one":            oneClick();        break;
+                case "two":            twoClick();        break;
+                case "three":          threeClick();      break;
+                case "four":           fourClick();       break;
+                case "five":           fiveClick();       break;
+                case "six":            sixClick();        break;
+                case "seven":          sevenClick();      break;
+                case "eight":          eightClick();      break;
+                case "nine":           nineClick();       break;
+                case "zero":           zeroClick();       break;
+                case "plus":           plusClick();       break;
+                case "minus":          minusClick();      break;
+                case "divide":         divideClick();     break;
+                case "multiply":       multiplyClick();   break;
+                case "decimal":        decimalClick();    break;
                 case "equals":         equalsClickEval(); break;                  // Use equalsClickCustom() to use my OWN eval() method
-                case "openBracket":    oBracketClick(); break;
-                case "closedBracket":  cBracketClick(); break;
+                case "openBracket":    oBracketClick();   break;
+                case "closedBracket":  cBracketClick();   break;
+                case "decimal":        decimalClick();    break;
             }
 
 
