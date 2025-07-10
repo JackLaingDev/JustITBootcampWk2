@@ -54,7 +54,17 @@ class Bank{
             case 1: this.accServ.createAccount(this.custServ.customer); display.accountSuccess(); break;
             case 2: this.custServ.showAccounts(); break;
             case 3: this.transferMenu(); break;
+            case 4: this.accountMenu(); break;
         }
+    }
+
+    customerMenu(){
+        display.customerOptions();
+        let choice = utility.getNumber();
+        this.customerChoose(choice);
+
+        // Testing
+        // console.log(`Account should now appear in: ${accounts}`);
     }
 
     transferMenu(){
@@ -70,17 +80,26 @@ class Bank{
         let recipientAcc = utility.getAccById(recipientId);
 
         transService.makeTransfer(senderAcc, recipientAcc, amount);
+        display.transactionSuccess();
         
     }
 
-    customerMenu(){
-        display.customerOptions();
+    accountMenu(){
+        display.accountMenuMessage();
+        custService.showAccounts();
         let choice = utility.getNumber();
-        this.customerChoose(choice);
 
-        // Testing
-        // console.log(`Account should now appear in: ${accounts}`);
+        let account = utility.getAccById(choice);
+
+        let accTransactions = this.transServ.getAccTransactions(account);
+
+        display.displayAccount(account);
+
+        for(const trans of accTransactions){
+            display.displayTransaction(trans);
+        }
     }
+
 
     run(){
         if(!custService.customer){
@@ -115,7 +134,7 @@ class CustomerService{
     showAccounts(){
         const custAccounts = this.customer.accounts;
 
-        console.log("Accounts:\n");
+        console.log("========\nAccounts:\n");
         for(const acc of custAccounts){
             display.displayAccount(acc);
         }
@@ -167,6 +186,23 @@ class TransactionService{
 
         }
     }
+
+    getAccTransactions(account){
+        let accTransactions = [];
+        let accountId = account.id;
+
+        for(const trans of transactions){
+            const senderId = trans.senderAcc.id;
+            const recipientId = trans.recipientAcc.id;
+
+            if((accountId == senderId)||(accountId == recipientId)){
+                accTransactions.push(trans);
+            }
+        }
+
+        return accTransactions;
+    }
+
 }
 
 
@@ -198,7 +234,7 @@ class Transaction{
     constructor(senderAcc, recipientAcc, transAmount){
         this.senderAcc = senderAcc;
         this.recipientAcc = recipientAcc;
-        this.transAmount = transAmount;
+        this.amount = transAmount;
         this.id = transactions.length;
     }
 }
@@ -212,7 +248,7 @@ class Display{
     }
 
     chooseOption(){
-        console.log("\nChoose an option by entering its corresponding number:");
+        console.log("========\nChoose an option by entering its corresponding number:");
     }
 
     getFName(){
@@ -224,7 +260,7 @@ class Display{
     }
 
     registerMessage(){
-        console.log("In Order to register we need your first and last name!");
+        console.log("========\nIn Order to register we need your first and last name!");
     }
 
     loginMessage(){
@@ -233,19 +269,15 @@ class Display{
 
     customerOptions(){
         this.chooseOption();
-        console.log("1. Create Account\n2. View Accounts\n3. Transfer between Accounts");
+        console.log("========\n1. Create Account\n2. View Accounts\n3. Transfer Between Accounts\n4. View Account");
     }
 
     accountSuccess(){
         console.log(`Account create successfully!`);
     }
 
-    displayAccount(account){
-        console.log(`${account.id}. Balance: ${account.balance}`);
-    }
-
     transactionSuccess(){
-        console.log("Transaction completed successfully!");
+        console.log("========\nTransaction completed successfully!");
     }
 
     senderAccMessage(){
@@ -257,13 +289,32 @@ class Display{
     }
 
     transferMessage(){
-        console.log("You have chosen to make a transaction!");
+        console.log("========\nYou have chosen to make a transaction!");
     }
 
     transAmountMessage(){
         console.log("Enter the amount you want to transfer:");
     }
 
+    notEnoughFunds(){
+        console.log("Not enough funds in account!");
+    }
+
+    chooseAccountMessage(){
+        console.log("Pick an account to display");
+    }
+
+    displayAccount(account){
+        console.log(`Account Id: ${account.id}\nAccount Balance: ${account.balance}\n--------`);
+    }
+
+    displayTransaction(trans){
+        console.log(`Transaction Id: ${trans.id} Sender Id: ${trans.senderAcc.id} Recipient Id: ${trans.recipientAcc.id} Amount: ${trans.amount}`);
+    }
+
+    accountMenuMessage(){
+        console.log("========\nChoose an account from below to see more info!");
+    }
 }
 
 // Utility functions
