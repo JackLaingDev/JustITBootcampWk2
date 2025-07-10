@@ -12,6 +12,7 @@ Classes:
 
 */
 
+let customers = [];                                              // Needed as a temp database, customers.length will allocate the id
 
 class Customer {
 
@@ -19,15 +20,23 @@ class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.accounts = [];
+        this.id = customers.length;
+    }
+
+    createCustomer(firstName, lastName){                         // USE INSTEAD OF INSTRUCTOR TO ENSURE CUST IS ADDED TO customers[]!
+        const cust = new Customer(firstName,lastName);
+        customers.push(cust);
     }
 
 }
 
 class Account {
 
-    constructor(customer){
+    constructor(customer, id){
         this.customer = customer;
         this.transactions = [];
+
     }
 
 }
+
